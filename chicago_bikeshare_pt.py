@@ -146,20 +146,11 @@ def most_popular_gender(data_list):
 
        
     """
-    def conta_genero(lst):
-        male = 0
-        female = 0
-        for sublist in lst:
-            if sublist[-2] == "Male":
-                male +=1
-            elif sublist[-2] == "Female":
-                female +=1
-        return [male, female]
-    
-    resultado = conta_genero(data_list)
-    if resultado[0] > resultado[1]:
+      
+    male, female = conta_gender(data_list)
+    if male > female:
         answer = "Masculino"
-    elif resultado[1] > resultado[0]:
+    elif female > male:
         answer == "Feminino"
     else:
         answer = 'Igual'
@@ -194,6 +185,13 @@ types = ['Customer', 'Dependent', 'Subscriber']
 
 ## gerando contagem de usuarios
 def count_users(data_list):
+    """
+    Função para contar ocorrências em sublistas em uma lista.
+    Argumentos:
+        data_list: lista contendo sublistas.
+    Retorna:
+        Lista com contagens para cada valor único na lista.
+    """
     customer = 0
     dependent = 0
     subscriber = 0
@@ -304,13 +302,13 @@ def mediana(lst):
       
         
     lista_sort = sorted(lst)
-    n = 0
+    median_index = 0
     for i in lista_sort:
-        n += 1
-    if n % 2 == 1: #número é impar
-        median_trip = lista_sort[n//2]
+        median_index += 1
+    if median_index % 2 == 1: #número é impar
+        median_trip = lista_sort[median_index//2]
     else:
-        median_trip = lista_sort[(n//2)-1:(n//2)+1] / 2.0
+        median_trip = lista_sort[(median_index//2)-1:(median_index//2)+1] / 2.0
     return median_trip
         
 median_trip = mediana(trip_int) 
@@ -356,11 +354,15 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 def count_items(column_list):
     item_types = []
     count_items = []
+    for item in set(column_list):
+        item_types.append(item)
+    for item in item_types:
+        count_items += 1
     return item_types, count_items
 
 
